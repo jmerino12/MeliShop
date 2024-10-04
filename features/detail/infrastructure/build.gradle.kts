@@ -33,6 +33,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:network"))
     implementation(project(":core:common"))
     implementation(project(":features:detail:domain"))
     implementation(libs.retrofit)
