@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.detail.domain"
+    namespace = "com.core.common"
     compileSdk = 34
 
     defaultConfig {
@@ -33,8 +33,6 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:common"))
-    implementation(libs.corrutines)
     implementation(libs.androidx.annotation)
-    testImplementation(libs.junit)
+
 }
