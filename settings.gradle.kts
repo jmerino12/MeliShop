@@ -21,4 +21,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "MeliShop"
 include(":app")
- 
+include(":features:detail:domain")
+include(":features:detail:infrastructure")
+include(":core:network")
