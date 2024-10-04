@@ -14,7 +14,7 @@ class DetailProductTest {
         val id = "2123MC"
         val name = "productName"
         val thumbnail = "thumbnail"
-        val price = 0.0
+        val price = 0
         val condition = "used"
         val images = listOf(Image("dfsd23", "imageUrl"))
         val description: String? = null
@@ -39,7 +39,7 @@ class DetailProductTest {
         val id = "2123MC"
         val name = "productName"
         val thumbnail = "thumbnail"
-        val price = 0.0
+        val price = 0
         val condition = "used"
         val images = listOf(Image("dfsd23", "imageUrl"))
         val description = "descriptions"
@@ -64,7 +64,7 @@ class DetailProductTest {
         val id = "2123MC"
         val name = "productName"
         val thumbnail = "thumbnail"
-        val price = 0.0
+        val price = 0
         val condition = "used"
         val images = listOf<Image>()
         val description: String? = null
@@ -89,7 +89,7 @@ class DetailProductTest {
         val id = "2123MC"
         val name = "productName"
         val thumbnail = "thumbnail"
-        val price = 0.0
+        val price = 0
         val condition = "used"
         val images = listOf(Image("dfsd23", "imageUrl"))
         val description: String? = null

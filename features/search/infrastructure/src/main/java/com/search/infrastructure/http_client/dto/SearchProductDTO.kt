@@ -1,8 +1,8 @@
-package com.detail.infrastructure.http_client.dto
+package com.search.infrastructure.http_client.dto
 
 import com.google.gson.annotations.SerializedName
 
-data class DetailProductDTO(
+data class SearchProductDTO(
     @SerializedName("id")
     val id: String,
     @SerializedName("title")
@@ -13,10 +13,8 @@ data class DetailProductDTO(
     val price: Int,
     @SerializedName("condition")
     val condition: String,
-    @SerializedName("pictures")
-    val images: List<PictureDTO>,
-    @SerializedName("attributes")
-    val attributes: List<AttributesDTO>
+    @SerializedName("original_price")
+    val originalPrice: Int?,
+    @SerializedName("shipping")
+    val shipping: ShippingDTO?,
 )
-
-

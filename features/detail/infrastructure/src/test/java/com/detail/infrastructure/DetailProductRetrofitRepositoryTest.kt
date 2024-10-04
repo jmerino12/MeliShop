@@ -31,7 +31,7 @@ class DetailProductRetrofitRepositoryTest {
         id = "",
         name = "",
         thumbnail = "",
-        price = 0.0,
+        price = 0,
         condition = "",
         images = listOf(),
         attributes = listOf()

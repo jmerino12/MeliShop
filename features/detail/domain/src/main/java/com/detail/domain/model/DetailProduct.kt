@@ -6,7 +6,7 @@ class DetailProduct(
     id: String,
     name: String,
     thumbnail: String,
-    price: Double,
+    price: Int,
     condition: String,
     val images: List<Image>,
     val description: String?,
