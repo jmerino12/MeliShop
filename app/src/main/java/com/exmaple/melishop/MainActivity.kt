@@ -27,7 +27,18 @@ class MainActivity : ComponentActivity() {
             MeliShopTheme {
                 val viewModel = hiltViewModel<SearchViewModel>()
                 val uiSate by viewModel.uiState.collectAsState()
-                SearchScreen(searchScreenUiState = uiSate)
+                val searchFieldState by viewModel.searchFieldState.collectAsState()
+                val queryText by viewModel.query.collectAsState()
+                val lastedSearches by viewModel.latestSearches.collectAsState()
+                SearchScreen(
+                    searchScreenUiState = uiSate,
+                    searchFieldState = searchFieldState,
+                    queryText = queryText, lastedSearches = lastedSearches,
+                    onSearchInputChanged = { query -> viewModel.onQueryChange(query) },
+                    onRevertInitialState = { viewModel.revertToInitialState() },
+                    onClearInputClicked = { viewModel.clearInput() },
+                    onSearchInputClicked = { viewModel.searchFieldActivated() },
+                    onSearch = { viewModel.getProductsBy() })
             }
         }
     }
