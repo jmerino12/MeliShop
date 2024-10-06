@@ -10,5 +10,5 @@ data class AttributesDTO(
     @SerializedName("value_id")
     val valueId: String?,
     @SerializedName("value_name")
-    val valueName: String
+    val valueName: String?
 )

@@ -29,6 +29,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
@@ -86,7 +87,11 @@ fun SearchScreen(
                             modifier = Modifier.clickable { onRevertInitialState() }
                         )
                     } else {
-                        Icon(imageVector = Icons.Default.Search, contentDescription = "search")
+                        Icon(
+                            imageVector = Icons.Default.Search, contentDescription = stringResource(
+                                id = R.string.search_screen_search_text
+                            )
+                        )
 
                     }
                 },
@@ -100,7 +105,7 @@ fun SearchScreen(
                             })
                     }
                 },
-                placeholder = { Text(text = "Buscar") },
+                placeholder = { Text(text = stringResource(R.string.search_screen_search_text)) },
                 modifier = Modifier.padding(padding)
             ) {
                 lastedSearches.forEach { item ->
@@ -124,9 +129,30 @@ fun SearchScreen(
                 }
             }
             when (searchScreenUiState) {
-                is SearchScreenUiState.Initial -> {}
+                is SearchScreenUiState.Initial -> {
+                    Column(
+                        modifier = Modifier.fillMaxSize(),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Text(
+                            text = if (lastedSearches.isEmpty())
+                                stringResource(id = R.string.search_screen_search_first_search)
+                            else stringResource(
+                                id = R.string.search_screen_search_search
+                            )
+                        )
+                    }
+                }
+
                 is SearchScreenUiState.LOADING -> {
-                    CircularProgressIndicator()
+                    Column(
+                        modifier = Modifier.fillMaxSize(),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        CircularProgressIndicator()
+                    }
                 }
 
                 is SearchScreenUiState.SUCCESS -> {
@@ -141,11 +167,25 @@ fun SearchScreen(
                 }
 
                 is SearchScreenUiState.EMPTY -> {
-                    Text(text = "No hay nada para visualizar")
+                    Column(
+                        modifier = Modifier.fillMaxSize(),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Text(text = stringResource(id = R.string.search_screen_search_empty_state))
+                    }
+
                 }
 
                 is SearchScreenUiState.ERROR -> {
-                    Text(text = "Ha ocurrido un error")
+                    Column(
+                        modifier = Modifier.fillMaxSize(),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Text(text = stringResource(id = R.string.search_screen_search_error_state))
+                    }
+
                 }
             }
 

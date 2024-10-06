@@ -80,8 +80,12 @@ class SearchViewModel @Inject constructor(
             viewModelScope.launch(ioDispatcher) {
                 try {
                     repository.searchProduct(query).collect { data ->
-                        _uiState.update { SearchScreenUiState.SUCCESS(data) }
-                        addToLatestSearches(query)
+                        if (data.isNotEmpty()) {
+                            _uiState.update { SearchScreenUiState.SUCCESS(data) }
+                            addToLatestSearches(query)
+                        } else {
+                            _uiState.update { SearchScreenUiState.EMPTY }
+                        }
                     }
                 } catch (e: Exception) {
                     _uiState.update { SearchScreenUiState.ERROR(e.message.toString()) }

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="search.screen_search_text">Buscar</string>
+    <string name="search.screen_search_first_search">Haz tú primera busqueda</string>
+    <string name="search.screen_search_search">Realiza tú busquedaa</string>
+    <string name="search.screen_search_empty_state">Ups! No tenemos nada que mostrarte de esta busqueda.</string>
+    <string name="search.screen_search_error_state">Ha ocurrido un error, intenta nuevamente.</string>
+</resources>
