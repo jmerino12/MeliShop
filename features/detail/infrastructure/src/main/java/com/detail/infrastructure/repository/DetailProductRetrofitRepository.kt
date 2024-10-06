@@ -1,7 +1,7 @@
 package com.detail.infrastructure.repository
 
 
-import com.core.network.exception.ExceptionTranslate
+import com.core.common.domain.exceptions.ExceptionTranslate
 import com.detail.domain.model.DetailProduct
 import com.detail.domain.repository.DetailProductRepository
 import com.detail.infrastructure.anticorruption.DetailProductTranslate
@@ -10,8 +10,9 @@ import com.detail.infrastructure.repository.contracts.DetailRemoteRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
+import javax.inject.Inject
 
-class DetailProductRetrofitRepository(private val productDetailService: DetailProductService) :
+class DetailProductRetrofitRepository @Inject constructor(private val productDetailService: DetailProductService) :
     DetailRemoteRepository, DetailProductRepository {
 
     override fun getProductDetail(id: String): Flow<DetailProduct?> {

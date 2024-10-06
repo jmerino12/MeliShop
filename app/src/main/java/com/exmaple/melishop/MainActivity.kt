@@ -71,8 +71,13 @@ private fun MeliNavHost(
             arguments = listOf(navArgument("productId") { type = NavType.StringType })
         ) { backStackEntry ->
             val viewModel = hiltViewModel<ProductDetailViewModel>()
-            val productId = backStackEntry.arguments?.getString("productId")
-            DetailScreen()
+            backStackEntry.arguments?.getString("productId")
+            val uiState by viewModel.uiState.collectAsState()
+            DetailScreen(
+                uiState = uiState,
+                onBackButton = { navHostController.popBackStack() },
+                onRetry = viewModel::onRetry
+            )
         }
     }
 }

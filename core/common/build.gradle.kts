@@ -35,6 +35,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.retrofit)
     implementation(libs.androidx.annotation)
     implementation(libs.hilt.android)
     ksp(libs.hilt.ksp)

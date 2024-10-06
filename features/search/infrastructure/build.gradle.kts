@@ -36,6 +36,7 @@ android {
 
 dependencies {
     implementation(project(":core:network"))
+    implementation(project(":core:common"))
     implementation(project(":features:search:domain"))
 
     implementation(libs.retrofit)

@@ -13,6 +13,7 @@ class DetailProductTranslate {
                     thumbnail,
                     price,
                     condition,
+                    originalPrice,
                     productDTO.images.map { imageDto -> ImageTranslate.fromImageDtoToDomain(imageDto) },
                     description = null,
                     productDTO.attributes.map { attributeDTO ->

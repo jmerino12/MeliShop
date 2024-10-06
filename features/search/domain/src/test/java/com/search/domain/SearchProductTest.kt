@@ -19,7 +19,7 @@ class SearchProductTest {
 
         //Act
         val result =
-            SearchProduct(id, name, thumbnail, price, condition, shipping, originalPrice)
+            SearchProduct(id, name, thumbnail, price, condition, originalPrice, shipping)
 
         //Assert
         Assert.assertNotNull(result)
@@ -38,7 +38,7 @@ class SearchProductTest {
 
 
         val product =
-            SearchProduct(id, name, thumbnail, price, condition, shipping, originalPrice)
+            SearchProduct(id, name, thumbnail, price, condition, originalPrice,shipping)
 
         //Act
         val discount = product.calculateDiscount()
@@ -61,7 +61,7 @@ class SearchProductTest {
 
 
         val product =
-            SearchProduct(id, name, thumbnail, price, condition, shipping, originalPrice)
+            SearchProduct(id, name, thumbnail, price, condition, originalPrice,shipping)
 
         //Act
         val discount = product.calculateDiscount()
@@ -84,7 +84,7 @@ class SearchProductTest {
 
 
         val product =
-            SearchProduct(id, name, thumbnail, price, condition, shipping, originalPrice)
+            SearchProduct(id, name, thumbnail, price, condition, originalPrice,shipping)
 
         //Act
         val discount = product.calculateDiscount()
@@ -108,7 +108,7 @@ class SearchProductTest {
 
         //Act
         val product =
-            SearchProduct(id, name, thumbnail, price, condition, shipping, originalPrice)
+            SearchProduct(id, name, thumbnail, price, condition, originalPrice,shipping)
 
 
         //Assert
@@ -130,7 +130,7 @@ class SearchProductTest {
 
         //Act
         val product =
-            SearchProduct(id, name, thumbnail, price, condition, shipping, originalPrice)
+            SearchProduct(id, name, thumbnail, price, condition, originalPrice,shipping)
 
 
         //Assert

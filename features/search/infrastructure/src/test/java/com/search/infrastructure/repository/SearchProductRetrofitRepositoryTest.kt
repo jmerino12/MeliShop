@@ -1,14 +1,13 @@
 package com.search.infrastructure.repository
 
-import com.core.network.exception.NotFoundException
-import com.core.network.exception.ServerException
-import com.core.network.exception.TechnicalException
-import com.core.network.exception.UnauthorizedException
+import com.core.common.domain.exceptions.NotFoundException
+import com.core.common.domain.exceptions.ServerException
+import com.core.common.domain.exceptions.TechnicalException
+import com.core.common.domain.exceptions.UnauthorizedException
 import com.search.infrastructure.http_client.dto.SearchResponseDTO
 import com.search.infrastructure.http_client.service.SearchProductService
 import com.search.infrastructure.shared.MainDispatcherRule
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runTest
 import okhttp3.ResponseBody
 import org.junit.Assert
@@ -35,7 +34,7 @@ class SearchProductRetrofitRepositoryTest {
     @InjectMocks
     private lateinit var repository: SearchProductRetrofitRepository
 
-    @Test(expected = NotFoundException::class)
+    @Test(expected = com.core.common.domain.exceptions.NotFoundException::class)
     fun searchProduct_queryError_throw_404() = runTest {
         //Arrange
         val query = "test"
@@ -52,7 +51,7 @@ class SearchProductRetrofitRepositoryTest {
         repository.searchProduct(query).first()
     }
 
-    @Test(expected = UnauthorizedException::class)
+    @Test(expected = com.core.common.domain.exceptions.UnauthorizedException::class)
     fun searchProduct_throw_Unauthorized_401() = runTest {
         //Arrange
         val query = "test"
@@ -69,7 +68,7 @@ class SearchProductRetrofitRepositoryTest {
         repository.searchProduct(query).first()
     }
 
-    @Test(expected = ServerException::class)
+    @Test(expected = com.core.common.domain.exceptions.ServerException::class)
     fun searchProduct_throw_severError_500() = runTest {
         //Arrange
         val query = "test"
@@ -86,7 +85,7 @@ class SearchProductRetrofitRepositoryTest {
         repository.searchProduct(query).first()
     }
 
-    @Test(expected = TechnicalException::class)
+    @Test(expected = com.core.common.domain.exceptions.TechnicalException::class)
     fun searchProduct_throw_technicalException_501() = runTest {
         //Arrange
         val query = "test"

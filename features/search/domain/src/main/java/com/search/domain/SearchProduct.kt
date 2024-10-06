@@ -8,15 +8,7 @@ class SearchProduct(
     thumbnail: String,
     price: Int,
     condition: String,
+    originalPrice: Int?,
     val shipping: Shipping?,
-    val originalPrice: Int?
-) : Product(id, name, thumbnail, price, condition) {
-
-    fun calculateDiscount(): Int {
-        if (originalPrice == null || originalPrice == 0 || price > originalPrice) {
-            return 0
-        }
-        return ((originalPrice - price).toDouble() / originalPrice * 100).toInt()
-    }
-}
+) : Product(id, name, thumbnail, price, originalPrice, condition)
 

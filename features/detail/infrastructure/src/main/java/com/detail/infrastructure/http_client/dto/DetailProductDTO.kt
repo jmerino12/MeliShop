@@ -11,6 +11,8 @@ data class DetailProductDTO(
     val thumbnail: String,
     @SerializedName("price")
     val price: Int,
+    @SerializedName("original_price")
+    val originalPrice: Int?,
     @SerializedName("condition")
     val condition: String,
     @SerializedName("pictures")

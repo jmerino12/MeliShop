@@ -1,9 +1,8 @@
 package com.search.infrastructure.repository
 
-import com.core.network.exception.ExceptionTranslate
+import com.core.common.domain.exceptions.ExceptionTranslate
 import com.search.domain.SearchProduct
 import com.search.infrastructure.anticorruption.SearchProductTranslate
-import com.core.network.exception.TechnicalException
 import com.search.infrastructure.http_client.service.SearchProductService
 import com.search.repository.ProductSearchRepository
 import kotlinx.coroutines.flow.Flow

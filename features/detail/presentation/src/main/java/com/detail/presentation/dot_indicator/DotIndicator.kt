@@ -26,7 +26,6 @@ fun DotIndicator(
     modifier: Modifier = Modifier,
     spacing: Dp = 10.dp
 ) {
-
     Box(
         modifier = modifier,
         contentAlignment = Alignment.CenterStart
@@ -37,27 +36,21 @@ fun DotIndicator(
                 .height(10.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            repeat(count) {
+            repeat(count) { index ->
                 Box(
                     modifier = Modifier
                         .size(10.dp)
                         .background(
-                            color = Color(0xFFD9D9D9),
+                            color = if (index == pagerState.currentPage) {
+                                Color(0xFF3483FA)
+                            } else {
+                                Color(0xFFD9D9D9)
+                            },
                             shape = CircleShape
                         )
-
                 )
             }
         }
-
-        Box(
-            Modifier
-                .size(10.dp)
-                .background(
-                    color = Color(0xFF3483FA),
-                    shape = CircleShape
-                )
-        )
     }
 }
 
