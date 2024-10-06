@@ -18,6 +18,7 @@ class DetailProductTest {
         val condition = "used"
         val images = listOf(Image("dfsd23", "imageUrl"))
         val description: String? = null
+        val originalPrice = 0
         val attributes = listOf(
             Attribute(
                 "id", "name", "valueId",
@@ -27,7 +28,17 @@ class DetailProductTest {
 
         //Act
         val result =
-            DetailProduct(id, name, thumbnail, price, condition, images, description, attributes)
+            DetailProduct(
+                id,
+                name,
+                thumbnail,
+                price,
+                condition,
+                originalPrice,
+                images,
+                description,
+                attributes
+            )
 
         //Assert
         Assert.assertNull(result.description)
@@ -40,6 +51,7 @@ class DetailProductTest {
         val name = "productName"
         val thumbnail = "thumbnail"
         val price = 0
+        val originalPrice = 0
         val condition = "used"
         val images = listOf(Image("dfsd23", "imageUrl"))
         val description = "descriptions"
@@ -52,7 +64,17 @@ class DetailProductTest {
 
         //Act
         val result =
-            DetailProduct(id, name, thumbnail, price, condition, images, description, attributes)
+            DetailProduct(
+                id,
+                name,
+                thumbnail,
+                price,
+                condition,
+                originalPrice,
+                images,
+                description,
+                attributes
+            )
 
         //Assert
         Assert.assertNotNull(result.description)
@@ -65,6 +87,7 @@ class DetailProductTest {
         val name = "productName"
         val thumbnail = "thumbnail"
         val price = 0
+        val originalPrice = 0
         val condition = "used"
         val images = listOf<Image>()
         val description: String? = null
@@ -77,7 +100,17 @@ class DetailProductTest {
 
         //Act
         val result =
-            DetailProduct(id, name, thumbnail, price, condition, images, description, attributes)
+            DetailProduct(
+                id,
+                name,
+                thumbnail,
+                price,
+                condition,
+                originalPrice,
+                images,
+                description,
+                attributes
+            )
 
         //Assert
         Assert.assertTrue(result.images.isEmpty())
@@ -90,6 +123,7 @@ class DetailProductTest {
         val name = "productName"
         val thumbnail = "thumbnail"
         val price = 0
+        val originalPrice = 0
         val condition = "used"
         val images = listOf(Image("dfsd23", "imageUrl"))
         val description: String? = null
@@ -97,7 +131,17 @@ class DetailProductTest {
 
         //Act
         val result =
-            DetailProduct(id, name, thumbnail, price, condition, images, description, attributes)
+            DetailProduct(
+                id,
+                name,
+                thumbnail,
+                price,
+                condition,
+                originalPrice,
+                images,
+                description,
+                attributes
+            )
 
         //Assert
         Assert.assertTrue(result.attributes.isEmpty())

@@ -1,9 +1,9 @@
 package com.detail.infrastructure
 
-import com.core.network.exception.NotFoundException
-import com.core.network.exception.ServerException
-import com.core.network.exception.TechnicalException
-import com.core.network.exception.UnauthorizedException
+import com.core.common.domain.exceptions.NotFoundException
+import com.core.common.domain.exceptions.ServerException
+import com.core.common.domain.exceptions.TechnicalException
+import com.core.common.domain.exceptions.UnauthorizedException
 import com.detail.infrastructure.http_client.dto.DetailProductDTO
 import com.detail.infrastructure.http_client.service.DetailProductService
 import com.detail.infrastructure.repository.DetailProductRetrofitRepository
@@ -41,7 +41,8 @@ class DetailProductRetrofitRepositoryTest {
         price = 0,
         condition = "",
         images = listOf(),
-        attributes = listOf()
+        attributes = listOf(),
+        originalPrice = null
     )
 
 

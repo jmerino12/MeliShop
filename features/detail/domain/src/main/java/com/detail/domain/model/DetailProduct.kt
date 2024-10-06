@@ -8,9 +8,10 @@ class DetailProduct(
     thumbnail: String,
     price: Int,
     condition: String,
+    originalPrice: Int?,
     val images: List<Image>,
     val description: String?,
     val attributes: List<Attribute>
-) : Product(id, name, thumbnail, price, condition)
+) : Product(id, name, thumbnail, price, originalPrice, condition)
 
 
