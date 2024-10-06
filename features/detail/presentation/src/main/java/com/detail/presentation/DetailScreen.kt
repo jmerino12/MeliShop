@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
@@ -45,6 +46,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
+import com.detail.presentation.dot_indicator.DotIndicator
 
 @Composable
 fun DetailScreen(modifier: Modifier = Modifier) {
@@ -162,55 +164,59 @@ private fun BannerComponent(modifier: Modifier = Modifier) {
 @Composable
 private fun ImageComponent(modifier: Modifier = Modifier) {
     val pagerState = rememberPagerState { 3 }
-    Box(modifier = modifier.fillMaxSize()) {
-        Badge(
-            modifier = Modifier
-                .align(Alignment.TopStart)
-                .padding(12.dp),
-            containerColor = Color(0XFFD6D6D6)
-        ) {
-            Text("1 / 7", modifier = Modifier.padding(2.dp))
+    Column(modifier = modifier.wrapContentSize(), horizontalAlignment = Alignment.CenterHorizontally) {
+        Box(modifier = Modifier.weight(1f)) {
+            Badge(
+                modifier = Modifier
+                    .align(Alignment.TopStart)
+                    .padding(12.dp),
+                containerColor = Color(0XFFD6D6D6)
+            ) {
+                Text("1 / 7", modifier = Modifier.padding(2.dp))
+            }
+
+            IconButton(
+                onClick = {}, modifier = Modifier
+                    .padding(12.dp)
+                    .clip(CircleShape)
+                    .align(Alignment.TopEnd)
+                    .background(Color(0XFFD6D6D6))
+                    .size(34.dp)
+            ) {
+                Icon(
+                    Icons.Default.FavoriteBorder,
+                    contentDescription = null,
+                    tint = Color(0XFF3483fa),
+                    modifier = Modifier.size(18.dp)
+                )
+            }
+
+            IconButton(
+                onClick = {}, modifier = Modifier
+                    .padding(horizontal = 12.dp)
+                    .padding(bottom = 18.dp)
+                    .clip(CircleShape)
+                    .align(Alignment.BottomEnd)
+                    .background(Color(0XFFD6D6D6))
+                    .size(34.dp)
+            ) {
+                Icon(
+                    Icons.Default.Share,
+                    contentDescription = null,
+                    tint = Color(0XFF3483fa),
+                    modifier = Modifier.size(18.dp)
+                )
+            }
+
+            HorizontalPager(state = pagerState, modifier = modifier) {
+
+            }
+
         }
-
-        IconButton(
-            onClick = {}, modifier = Modifier
-                .padding(12.dp)
-                .clip(CircleShape)
-                .align(Alignment.TopEnd)
-                .background(Color(0XFFD6D6D6))
-                .size(34.dp)
-        ) {
-            Icon(
-                Icons.Default.FavoriteBorder,
-                contentDescription = null,
-                tint = Color(0XFF3483fa),
-                modifier = Modifier.size(18.dp)
-            )
-        }
-
-        IconButton(
-            onClick = {}, modifier = Modifier
-                .padding(horizontal = 12.dp)
-                .padding(bottom = 18.dp)
-                .clip(CircleShape)
-                .align(Alignment.BottomEnd)
-                .background(Color(0XFFD6D6D6))
-                .size(34.dp)
-        ) {
-            Icon(
-                Icons.Default.Share,
-                contentDescription = null,
-                tint = Color(0XFF3483fa),
-                modifier = Modifier.size(18.dp)
-            )
-        }
-
-        HorizontalPager(state = pagerState, modifier = modifier) {
-
-        }
-
+        DotIndicator(
+            pagerState = pagerState, count = pagerState.pageCount
+        )
     }
-
 }
 
 @Composable
