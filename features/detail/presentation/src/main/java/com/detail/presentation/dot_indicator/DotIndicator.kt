@@ -24,7 +24,7 @@ fun DotIndicator(
     count: Int,
     pagerState: PagerState,
     modifier: Modifier = Modifier,
-    spacing: Dp = 10.dp
+    spacing: Dp = 4.dp
 ) {
     Box(
         modifier = modifier,
