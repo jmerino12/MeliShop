@@ -7,12 +7,9 @@ import com.core.common.domain.IoDispatcher
 import com.search.infrastructure.repository.SearchProductRetrofitRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -38,40 +35,6 @@ class SearchViewModel @Inject constructor(
     val uiState: StateFlow<SearchScreenUiState> = _uiState.asStateFlow()
 
 
-    fun onQueryChange(newText: String) {
-        _query.value = newText
-    }
-
-    fun searchFieldActivated() {
-        activateSearchField()
-    }
-
-
-    fun clearInput() {
-        _query.update { "" }
-    }
-
-    fun revertToInitialState() {
-        _searchFieldState.update { SearchFieldState.Idle }
-        val currentState = _uiState.value
-        if (currentState is SearchScreenUiState.SUCCESS && currentState.items.isNotEmpty()) {
-            return
-        }
-        _uiState.update { SearchScreenUiState.Initial }
-        _query.update { "" }
-
-    }
-
-    private fun disableSearchField() {
-        _searchFieldState.update { SearchFieldState.Idle }
-    }
-
-
-    private fun activateSearchField() {
-        _searchFieldState.update { SearchFieldState.WithInputActive }
-
-    }
-
     fun getProductsBy() {
         val query = _query.value.trim()
         if (query.isNotEmpty() && query.isNotBlank()) {
@@ -93,6 +56,41 @@ class SearchViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    fun revertToInitialState() {
+        _searchFieldState.update { SearchFieldState.Idle }
+        val currentState = _uiState.value
+        if (currentState is SearchScreenUiState.SUCCESS && currentState.items.isNotEmpty()) {
+            return
+        }
+        _uiState.update { SearchScreenUiState.Initial }
+        _query.update { "" }
+
+    }
+
+
+    fun onQueryChange(newText: String) {
+        _query.value = newText
+    }
+
+    fun searchFieldActivated() {
+        activateSearchField()
+    }
+
+
+    fun clearInput() {
+        _query.update { "" }
+    }
+
+    private fun disableSearchField() {
+        _searchFieldState.update { SearchFieldState.Idle }
+    }
+
+
+    private fun activateSearchField() {
+        _searchFieldState.update { SearchFieldState.WithInputActive }
+
     }
 
     private fun addToLatestSearches(query: String) {
