@@ -1,6 +1,5 @@
 package com.detail.presentation
 
-import android.content.res.Resources
 import android.content.res.Resources.NotFoundException
 import android.util.Log
 import androidx.lifecycle.SavedStateHandle
@@ -8,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.core.common.domain.IoDispatcher
 import com.core.common.domain.exceptions.ServerException
-import com.core.common.domain.exceptions.UnauthorizedException
 import com.detail.domain.model.DetailProduct
 import com.detail.domain.repository.DetailProductRepository
 import com.detail.infrastructure.repository.contracts.DetailRemoteRepository
@@ -20,6 +18,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
@@ -49,10 +48,22 @@ class ProductDetailViewModel @Inject constructor(
         initialValue = DetailScreenUiState.Initial
     )
 
+
+    private val _isExpanded = MutableStateFlow(false)
+    val isExpanded: StateFlow<Boolean> = _isExpanded.asStateFlow()
+
     private var job: Job? = null
 
     fun onRetry() {
         getDetailProduct()
+    }
+
+    fun showMore(){
+        _isExpanded.update { true }
+    }
+
+    fun showLess(){
+        _isExpanded.update { false }
     }
 
     private fun getDetailProduct() {

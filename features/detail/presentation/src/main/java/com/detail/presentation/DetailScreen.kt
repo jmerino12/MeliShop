@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -64,10 +65,15 @@ import com.detail.presentation.dot_indicator.DotIndicator
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailScreen(
-    modifier: Modifier = Modifier, uiState: DetailScreenUiState,
+    modifier: Modifier = Modifier,
+    uiState: DetailScreenUiState,
     onBackButton: () -> Unit,
     onRetry: () -> Unit,
-) {
+    isExpanded: Boolean,
+    showMoreDescription: () -> Unit,
+    showLessDescription: () -> Unit,
+
+    ) {
     Scaffold(modifier = modifier, topBar = {
         TopAppBar(title = { }, navigationIcon = {
             IconButton(onClick = onBackButton) {
@@ -80,7 +86,9 @@ fun DetailScreen(
             DetailScreenUiState.Initial -> Unit
             is DetailScreenUiState.LOADING -> {
                 Column(
-                    modifier = Modifier.fillMaxSize().padding(padding),
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(padding),
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
@@ -153,11 +161,17 @@ fun DetailScreen(
 
 
                     item.description?.let {
-                        DescriptionComponent(modifier = Modifier.constrainAs(descriptionComponent) {
-                            top.linkTo(price.bottom, 8.dp)
-                            start.linkTo(parent.start)
-                            end.linkTo(parent.end)
-                        }, description = it)
+                        DescriptionComponent(
+                            modifier = Modifier.constrainAs(descriptionComponent) {
+                                top.linkTo(price.bottom, 8.dp)
+                                start.linkTo(parent.start)
+                                end.linkTo(parent.end)
+                            },
+                            description = it,
+                            isExpanded = isExpanded,
+                            showMoreDescription = showMoreDescription,
+                            showLessDescription = showLessDescription
+                        )
                     }
 
                 }
@@ -266,6 +280,7 @@ private fun ImageComponent(modifier: Modifier = Modifier, images: List<Image>) {
             }
 
         }
+        Spacer(modifier = Modifier.height(8.dp))
         DotIndicator(
             pagerState = pagerState,
             count = pagerState.pageCount,
@@ -274,11 +289,14 @@ private fun ImageComponent(modifier: Modifier = Modifier, images: List<Image>) {
 }
 
 @Composable
-private fun DescriptionComponent(modifier: Modifier = Modifier, description: String) {
-    var isExpanded by remember { mutableStateOf(false) }
-    val lineCount = remember(description) {
-        description.lineCount()
-    }
+private fun DescriptionComponent(
+    modifier: Modifier = Modifier,
+    description: String,
+    isExpanded: Boolean,
+    showMoreDescription: () -> Unit,
+    showLessDescription: () -> Unit
+) {
+    val lineCount = description.lineCount()
     Column(
         modifier = modifier.animateContentSize(
             animationSpec = tween(
@@ -299,7 +317,13 @@ private fun DescriptionComponent(modifier: Modifier = Modifier, description: Str
                 color = Color(0XFF3483fa),
                 modifier = Modifier
                     .padding(vertical = 14.dp)
-                    .clickable { isExpanded = !isExpanded }
+                    .clickable {
+                        if (isExpanded) {
+                            showLessDescription()
+                        } else {
+                            showMoreDescription()
+                        }
+                    }
             )
         }
     }
@@ -312,7 +336,12 @@ private fun String.lineCount(): Int {
 @Preview
 @Composable
 private fun DescriptionComponentPreview() {
-    DescriptionComponent(description = "")
+    DescriptionComponent(
+        description = "",
+        showMoreDescription = {},
+        showLessDescription = {},
+        isExpanded = false
+    )
 }
 
 @Preview
@@ -334,5 +363,12 @@ private fun BannerComponentPreview() {
 @Preview
 @Composable
 private fun DetailScreenPreview() {
-    DetailScreen(uiState = DetailScreenUiState.Initial, onBackButton = {}, onRetry = {})
+    DetailScreen(
+        uiState = DetailScreenUiState.Initial,
+        onBackButton = {},
+        onRetry = {},
+        isExpanded = false,
+        showMoreDescription = {},
+        showLessDescription = {}
+    )
 }

@@ -73,10 +73,14 @@ private fun MeliNavHost(
             val viewModel = hiltViewModel<ProductDetailViewModel>()
             backStackEntry.arguments?.getString("productId")
             val uiState by viewModel.uiState.collectAsState()
+            val isExpanded by viewModel.isExpanded.collectAsState()
             DetailScreen(
                 uiState = uiState,
                 onBackButton = { navHostController.popBackStack() },
-                onRetry = viewModel::onRetry
+                onRetry = viewModel::onRetry,
+                isExpanded = isExpanded,
+                showMoreDescription = { viewModel.showMore() },
+                showLessDescription =  { viewModel.showLess() }
             )
         }
     }
