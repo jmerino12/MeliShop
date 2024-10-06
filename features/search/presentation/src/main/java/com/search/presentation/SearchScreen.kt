@@ -56,6 +56,7 @@ fun SearchScreen(
     onClearInputClicked: () -> Unit,
     onSearch: () -> Unit,
     queryText: String,
+    onProductClick: (String) -> Unit
 ) {
     Scaffold(modifier = modifier.fillMaxSize()) { padding ->
         Column(
@@ -103,14 +104,15 @@ fun SearchScreen(
                 modifier = Modifier.padding(padding)
             ) {
                 lastedSearches.forEach { item ->
-                    Row(modifier = Modifier
+                    Row(
+                        modifier = Modifier
 
-                        .fillMaxWidth()
-                        .padding(14.dp)
-                        .clickable {
-                            onSearchInputChanged(item)
-                            onSearch()
-                        }, verticalAlignment = Alignment.CenterVertically
+                            .fillMaxWidth()
+                            .padding(14.dp)
+                            .clickable {
+                                onSearchInputChanged(item)
+                                onSearch()
+                            }, verticalAlignment = Alignment.CenterVertically
                     ) {
                         Icon(
                             painterResource(id = R.drawable.ic_histoy),
@@ -130,7 +132,10 @@ fun SearchScreen(
                 is SearchScreenUiState.SUCCESS -> {
                     LazyColumn(modifier = Modifier.fillMaxSize()) {
                         items(searchScreenUiState.items) { searchProduct ->
-                            SearchProductItem(searchProduct = searchProduct)
+                            SearchProductItem(
+                                searchProduct = searchProduct,
+                                onProductClick = onProductClick
+                            )
                         }
                     }
                 }
@@ -151,12 +156,17 @@ fun SearchScreen(
 }
 
 @Composable
-fun SearchProductItem(modifier: Modifier = Modifier, searchProduct: SearchProduct) {
+fun SearchProductItem(
+    modifier: Modifier = Modifier, searchProduct: SearchProduct,
+    onProductClick: (String) -> Unit
+) {
     ConstraintLayout(
         modifier
             .fillMaxWidth()
             .padding(8.dp)
-            .clickable { }
+            .clickable {
+                onProductClick(searchProduct.id)
+            }
     ) {
         val (
             image,
@@ -284,7 +294,8 @@ private fun SearchScreenPreview() {
         onClearInputClicked = {},
         lastedSearches = listOf(),
         onSearch = {},
-        onRevertInitialState = {}
+        onRevertInitialState = {},
+        onProductClick = {}
     )
 }
 
@@ -300,8 +311,9 @@ private fun SearchProductItemPreview() {
                 thumbnail = "",
                 price = 1200000,
                 originalPrice = 1500000,
-                shipping = null
-            )
+                shipping = null,
+            ),
+            onProductClick = {}
         )
         SearchProductItem(
             searchProduct = SearchProduct(
@@ -312,7 +324,8 @@ private fun SearchProductItemPreview() {
                 price = 1203233,
                 originalPrice = null,
                 shipping = null
-            )
+            ),
+            onProductClick = {}
         )
 
         SearchProductItem(
@@ -324,7 +337,8 @@ private fun SearchProductItemPreview() {
                 price = 1203233,
                 originalPrice = null,
                 shipping = Shipping(true)
-            )
+            ),
+            onProductClick = {}
         )
     }
 
